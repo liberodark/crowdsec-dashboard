@@ -1,0 +1,16 @@
+[Unit]
+Description=crowdsec-dashboard
+After=network.target
+
+[Service]
+WorkingDirectory=/opt/crowdsec/
+User=crowdsec
+Group=crowdsec
+Type=simple
+UMask=000
+ExecStart=/opt/crowdsec/run.sh
+RestartSec=120
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
