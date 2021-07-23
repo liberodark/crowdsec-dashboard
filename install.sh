@@ -1,6 +1,6 @@
 #!/bin/sh
 
-sudo mkdir -p /opt/crowdsec
+sudo mkdir -p /opt/crowdsec/metabase-data/
 sudo cp run.sh /opt/crowdsec
 #sudo cp ./*.db /opt/crowdsec
 sudo cp crowdsec-dashboard.service /etc/systemd/system/
@@ -12,7 +12,7 @@ sudo unzip metabase_sqlite.zip && rm -f metabase_sqlite.zip || exit
 sudo cp /opt/crowdsec/metabase.db/metabase.db.mv.db /opt/crowdsec/metabase.db.mv.db || exit
 #sudo rm -rf /opt/crowdsec/metabase.db || exit
 #sudo rm -rf /opt/crowdsec/metabase.db.trace.db || exit
-sudo ln -s /var/lib/crowdsec/data/crowdsec.db /opt/crowdsec/crowdsec.db || exit
+sudo ln -s /var/lib/crowdsec/data/crowdsec.db /opt/crowdsec/metabase-data/crowdsec.db || exit
 sudo groupadd -r crowdsec
 sudo useradd -r -g crowdsec -d /opt/crowdsec -s /sbin/nologin crowdsec
 sudo chmod +x /opt/crowdsec/run.sh
