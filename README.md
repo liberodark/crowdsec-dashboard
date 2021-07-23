@@ -16,4 +16,6 @@ cd crowdsec-dashboard && chmod +x install.sh
 - user : `crowdsec@crowdsec.net`
 - password : `!!Cr0wdS3c_M3t4b4s3??`
 
+https://github.com/erdoukki/crowdsec-dashboard/blob/main/Screenshot%202021-07-23%20at%2018-54-32%20Metabase.png
+
 Edit settings and go to database to change /metabase-data/crowdsec.db to /opt/crowdsec/metabase-data/crowdsec.db
