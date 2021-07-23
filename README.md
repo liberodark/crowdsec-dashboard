@@ -1,5 +1,11 @@
 # crowdsec-dashboard
 
+Debian requirements :
+```
+sudo apt install openjdk-11-jre-headless -y
+sudo apt install unzip -y
+```
+
 ```
 git clone https://github.com/liberodark/crowdsec-dashboard
 cd crowdsec-dashboard && chmod +x install.sh
