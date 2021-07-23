@@ -15,3 +15,5 @@ cd crowdsec-dashboard && chmod +x install.sh
 - Dashboard is available in http://127.0.0.1:3000/
 - user : `crowdsec@crowdsec.net`
 - password : `!!Cr0wdS3c_M3t4b4s3??`
+
+Edit settings and go to database to change /metabase-data/crowdsec.db to /opt/crowdsec/metabase-data/crowdsec.db
