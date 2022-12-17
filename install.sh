@@ -49,10 +49,11 @@ cp run.sh /opt/crowdsec
 cd /opt/crowdsec || exit
 wget $METABASEJAR
 wget $METABASEDB
-unzip metabase_sqlite.zip && rm -f metabase_sqlite.zip || exit
-mv /opt/crowdsec/metabase.db/metabase.db.mv.db /opt/crowdsec/metabase.db.mv.db || exit
+unzip metabase_sqlite.zip
+rm -f metabase_sqlite.zip
+mv /opt/crowdsec/metabase.db/metabase.db.mv.db /opt/crowdsec/metabase.db.mv.db
 rm -rf /opt/crowdsec/metabase.db/
-ln -s /var/lib/crowdsec/data/crowdsec.db /opt/crowdsec/metabase-data/crowdsec.db || exit
+ln -s /var/lib/crowdsec/data/crowdsec.db /opt/crowdsec/metabase-data/crowdsec.db
 
 # Setting up Crowsec dashboard service
 tee /etc/systemd/system/crowdsec-dashboard.service << EOF
