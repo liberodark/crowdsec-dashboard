@@ -3,7 +3,7 @@
 set -e
 
 # Variables
-METABASEVER="0.45.1" #https://github.com/metabase/metabase/releases
+METABASEVER="0.45.1"
 METABASEJAR="https://downloads.metabase.com/v$METABASEVER/metabase.jar"
 METABASEDB="https://crowdsec-statics-assets.s3-eu-west-1.amazonaws.com/metabase_sqlite.zip"
 SERVERIP="$(/sbin/ip -o -4 addr list eth0 | awk '{print $4}' | cut -d/ -f1)"
@@ -31,7 +31,7 @@ fi
 
 # Check if required packages are installed - install if they aren't.
 package_check() {
-    PKG_LIST='curl jq unzip wget openjdk-11-jre-headless'
+    PKG_LIST='unzip wget curl jq openjdk-11-jre-headless'
     # if input is a file, convert it to a string like:
     # PKG_LIST=$(cat ./packages.txt)
     # PKG_LIST=$1
@@ -54,12 +54,10 @@ echo "==> Checking for prerequisite packages..."
 package_check
 
 # Create Directories and copy files in
-echo "==> Creating directories..."
 mkdir -p /opt/crowdsec/metabase-data/
 cp run.sh /opt/crowdsec
 
 # Downloading and setting up Metabase
-echo "==> Downloading and setting up Metabase..."
 cd /opt/crowdsec
 wget $METABASEJAR
 wget $METABASEDB
@@ -93,7 +91,6 @@ WantedBy=multi-user.target
 EOF
 
 # Adding and configuring groups
-echo "==> Creating user, group and setting permissions..."
 groupadd -r crowdsec
 useradd -r -g crowdsec -d /opt/crowdsec -s /sbin/nologin crowdsec
 chmod +x /opt/crowdsec/run.sh
@@ -101,12 +98,10 @@ chown -R crowdsec: /opt/crowdsec
 chown crowdsec: /var/lib/crowdsec/data/crowdsec.db
 
 # Set up logs
-echo "==> Setting up log file..."
 touch /var/log/metabase.log
 chown crowdsec:crowdsec /var/log/metabase.log
 
 # Enable Crowsec dashboard service
-echo "==> Enabling dashboard service..."
 systemctl enable --now crowdsec-dashboard
 
 echo ""
