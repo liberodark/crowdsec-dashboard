@@ -13,7 +13,7 @@ cd crowdsec-dashboard && chmod +x install.sh
 sudo ./install.sh
 ```
 
-- Dashboard is available in http://<serverIP>:3000/
+- Dashboard is available at http://<serverIP>:3000/
 - user : `crowdsec@crowdsec.net`
 - password : `!!Cr0wdS3c_M3t4b4s3??`
 

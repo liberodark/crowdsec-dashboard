@@ -31,7 +31,7 @@ fi
 
 # Check if required packages are installed - install if they aren't.
 package_check() {
-    PKG_LIST='unzip wget curl jq openjdk-11-jre-headless'
+    PKG_LIST='curl jq unzip wget openjdk-11-jre-headless'
     # if input is a file, convert it to a string like:
     # PKG_LIST=$(cat ./packages.txt)
     # PKG_LIST=$1
