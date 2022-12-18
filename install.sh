@@ -54,10 +54,12 @@ echo "==> Checking for prerequisite packages..."
 package_check
 
 # Create Directories and copy files in
+echo "==> Creating directories..."
 mkdir -p /opt/crowdsec/metabase-data/
 cp run.sh /opt/crowdsec
 
 # Downloading and setting up Metabase
+echo "==> Downloading and setting up Metabase..."
 cd /opt/crowdsec
 wget $METABASEJAR
 wget $METABASEDB
@@ -91,6 +93,7 @@ WantedBy=multi-user.target
 EOF
 
 # Adding and configuring groups
+echo "==> Creating user, group and setting permissions..."
 groupadd -r crowdsec
 useradd -r -g crowdsec -d /opt/crowdsec -s /sbin/nologin crowdsec
 chmod +x /opt/crowdsec/run.sh
@@ -98,10 +101,12 @@ chown -R crowdsec: /opt/crowdsec
 chown crowdsec: /var/lib/crowdsec/data/crowdsec.db
 
 # Set up logs
+echo "==> Setting up log file..."
 touch /var/log/metabase.log
 chown crowdsec:crowdsec /var/log/metabase.log
 
 # Enable Crowsec dashboard service
+echo "==> Enabling dashboard service..."
 systemctl enable --now crowdsec-dashboard
 
 echo ""
