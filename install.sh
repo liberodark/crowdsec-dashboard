@@ -3,7 +3,7 @@
 set -e
 
 # Variables
-METABASEVER="0.45.1"
+METABASEVER="0.45.1" #https://github.com/metabase/metabase/releases
 METABASEJAR="https://downloads.metabase.com/v$METABASEVER/metabase.jar"
 METABASEDB="https://crowdsec-statics-assets.s3-eu-west-1.amazonaws.com/metabase_sqlite.zip"
 SERVERIP="$(/sbin/ip -o -4 addr list eth0 | awk '{print $4}' | cut -d/ -f1)"
