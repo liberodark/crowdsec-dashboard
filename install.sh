@@ -7,6 +7,11 @@ METABASEVER="0.45.1" #https://github.com/metabase/metabase/releases
 METABASEJAR="https://downloads.metabase.com/v$METABASEVER/metabase.jar"
 METABASEDB="https://crowdsec-statics-assets.s3-eu-west-1.amazonaws.com/metabase_sqlite.zip"
 SERVERIP="$(/sbin/ip -o -4 addr list eth0 | awk '{print $4}' | cut -d/ -f1)"
+JAVAMIN="256m"
+JAVAMAX="256m"
+JETTY_HOST="0.0.0.0"
+JETTY_PORT="3000"
+
 
 # Functions
 wait_str() {
@@ -56,7 +61,6 @@ package_check
 # Create Directories and copy files in
 echo "==> Creating directories..."
 mkdir -p /opt/crowdsec/metabase-data/
-cp run.sh /opt/crowdsec
 
 # Downloading and setting up Metabase
 echo "==> Downloading and setting up Metabase..."
@@ -90,6 +94,27 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
+EOF
+
+# Creating run script
+echo ""
+echo "==> Creating service script..."
+echo ""
+tee /opt/crowdsec/run.sh >/dev/null << EOF
+#!/bin/sh
+
+set -e
+
+# Variables
+export MB_DB_TYPE="h2"
+export MB_DB_FILE="/opt/crowdsec/metabase.db"
+export MB_JETTY_HOST="$JETTY_HOST"
+export MB_JETTY_PORT="$JETTY_PORT"
+# Set min + max java heap size. Recommended to be half your RAM.
+export JAVAMIN="$JAVAMIN"
+export JAVAMAX="$JAVAMAX"
+
+java -Xms$JAVAMIN -Xmx$JAVAMAX -jar metabase.jar >> /var/log/metabase.log
 EOF
 
 # Adding and configuring groups
