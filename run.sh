@@ -1,11 +1,14 @@
 #!/bin/sh
 
-TYPE="h2"
-DB="/opt/crowdsec/metabase.db"
-HOST="0.0.0.0"
-PORT="3000"
+set -e
 
-touch /var/log/metabase.log
-chown crowdsec:crowdsec /var/log/metabase.log
+# Variables
+export MB_DB_TYPE="h2"
+export MB_DB_FILE="/opt/crowdsec/metabase.db"
+export MB_JETTY_HOST="0.0.0.0"
+export MB_JETTY_PORT="3000"
+# Set min + max java heap size. Recommended to be half your RAM.
+export JAVAMIN="256m"
+export JAVAMAX="256m"
 
-MB_JETTY_HOST="$HOST" MB_JETTY_PORT="$PORT" MB_DB_TYPE="$TYPE" MB_DB_FILE="$DB" java -DMB_JETTY_HOST="$HOST" -DMB_JETTY_PORT="$PORT" -jar metabase.jar >> /var/log/metabase.log
+java -Xms$JAVAMIN -Xmx$JAVAMAX -jar metabase.jar >> /var/log/metabase.log
