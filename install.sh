@@ -135,7 +135,7 @@ echo "==> Enabling dashboard service..."
 systemctl enable --now crowdsec-dashboard
 
 echo ""
-echo "==> Waiting for metabase to launch..."
+echo "==> Waiting for Metabase to launch..."
 
 while ! nc -z localhost 3000; do
   sleep 1
